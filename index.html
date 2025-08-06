@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vited.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Site</title>
+
+    <script>
+      (function () {
+        try {
+          const cached = localStorage.getItem("site_settings_cache");
+          if (cached) {
+            const parsed = JSON.parse(cached);
+            const isExpired = Date.now() - parsed.timestamp > 600000; // 10 minutes
+
+            if (!isExpired && parsed.data) {
+              const title =
+                parsed.data.browserTitle || parsed.data.siteName || "Site";
+              if (title !== "Site") {
+                document.title = title;
+              }
+
+              if (parsed.data.faviconImage?.url) {
+                const link = document.createElement("link");
+                link.rel = "icon";
+                link.type = "image/x-icon";
+                link.href = parsed.data.faviconImage.url;
+                link.onerror = function () {
+                  this.href = "/vited.svg";
+                  this.type = "image/svg+xml";
+                };
+
+                const existingFavicon =
+                  document.querySelector('link[rel="icon"]');
+                if (existingFavicon) {
+                  existingFavicon.remove();
+                }
+                document.head.appendChild(link);
+              }
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <link rel="preload" href="/vited.svg" as="image" type="image/svg+xml" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
