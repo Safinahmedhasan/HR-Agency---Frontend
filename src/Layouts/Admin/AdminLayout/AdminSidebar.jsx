@@ -8,6 +8,7 @@ import {
   Settings,
   BarChart3,
   X,
+  Database,
   LogOut,
   ChevronRight,
   UserCheck,
@@ -301,6 +302,12 @@ const AdminSidebar = ({ isSidebarOpen, isMobileMenuOpen, closeMobileMenu }) => {
           description: "Users awaiting approval",
         },
       ],
+    },
+     {
+      path: "/admin/services",
+      name: "HR Services",
+      icon: Database,
+      description: "Manage HR Services",
     },
     {
       path: "/admin/reports",

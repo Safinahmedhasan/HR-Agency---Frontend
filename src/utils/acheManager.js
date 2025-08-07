@@ -1,4 +1,4 @@
-// utils/cacheManager.js - Optimized for React Project
+// utils/cacheManager.js - Updated with Service Support
 
 // Cache configuration
 const CACHE_CONFIG = {
@@ -24,6 +24,12 @@ export const CACHE_KEYS = {
   // Site Settings
   SITE_SETTINGS: "site_settings_cache",
   SITE_SETTINGS_HISTORY: "site_settings_history_cache",
+
+  // 🌟 NEW: Service Management
+  HR_SERVICES_PUBLIC: "hr_services_public", // For frontend display
+  HR_SERVICES_ADMIN: "hr_services_admin", // For admin management
+  SERVICE_CONFIG: "service_config", // Service configuration data
+  SERVICE_STATS: "service_stats_cache", // Service statistics
 
   // General
   API_RESPONSES: "api_responses_cache",
@@ -611,6 +617,62 @@ export const CacheUtils = {
     clear: () => cacheManager.remove(CACHE_KEYS.SITE_SETTINGS),
   },
 
+  // 🌟 NEW: HR Services cache helpers
+  hrServices: {
+    // Public services (for frontend display)
+    getPublic: () => cacheManager.get(CACHE_KEYS.HR_SERVICES_PUBLIC),
+    setPublic: (data) =>
+      cacheManager.set(CACHE_KEYS.HR_SERVICES_PUBLIC, data, {
+        expiry: 10 * 60 * 1000, // 10 minutes for public services
+        storage: "localStorage",
+      }),
+    clearPublic: () => cacheManager.remove(CACHE_KEYS.HR_SERVICES_PUBLIC),
+
+    // Admin services (for admin panel)
+    getAdmin: () => cacheManager.get(CACHE_KEYS.HR_SERVICES_ADMIN),
+    setAdmin: (data) =>
+      cacheManager.set(CACHE_KEYS.HR_SERVICES_ADMIN, data, {
+        expiry: 5 * 60 * 1000, // 5 minutes for admin data
+        storage: "localStorage",
+      }),
+    clearAdmin: () => cacheManager.remove(CACHE_KEYS.HR_SERVICES_ADMIN),
+
+    // Service configuration
+    getConfig: () => cacheManager.get(CACHE_KEYS.SERVICE_CONFIG),
+    setConfig: (data) =>
+      cacheManager.set(CACHE_KEYS.SERVICE_CONFIG, data, {
+        expiry: 30 * 60 * 1000, // 30 minutes for config data
+        storage: "localStorage",
+      }),
+    clearConfig: () => cacheManager.remove(CACHE_KEYS.SERVICE_CONFIG),
+
+    // Service statistics
+    getStats: () => cacheManager.get(CACHE_KEYS.SERVICE_STATS),
+    setStats: (data) =>
+      cacheManager.set(CACHE_KEYS.SERVICE_STATS, data, {
+        expiry: 5 * 60 * 1000, // 5 minutes for stats
+        storage: "localStorage",
+      }),
+    clearStats: () => cacheManager.remove(CACHE_KEYS.SERVICE_STATS),
+
+    // Clear all service-related cache
+    clearAll: () => {
+      cacheManager.remove(CACHE_KEYS.HR_SERVICES_PUBLIC);
+      cacheManager.remove(CACHE_KEYS.HR_SERVICES_ADMIN);
+      cacheManager.remove(CACHE_KEYS.SERVICE_CONFIG);
+      cacheManager.remove(CACHE_KEYS.SERVICE_STATS);
+      console.log("🗑️ All HR services cache cleared");
+    },
+
+    // Smart cache invalidation for services
+    invalidateOnUpdate: () => {
+      // Clear both public and admin cache when services are updated
+      cacheManager.remove(CACHE_KEYS.HR_SERVICES_PUBLIC);
+      cacheManager.remove(CACHE_KEYS.HR_SERVICES_ADMIN);
+      console.log("🔄 Service caches invalidated after update");
+    },
+  },
+
   // Navigation data helpers
   navigationData: {
     get: () => cacheManager.get(CACHE_KEYS.NAVIGATION_DATA),
@@ -708,6 +770,31 @@ export const withCache = (key, options = {}) => {
     };
 
     return descriptor;
+  };
+};
+
+/**
+ * Service-specific cache hooks for React components
+ */
+export const useServiceCache = () => {
+  return {
+    // Public services for frontend
+    getPublicServices: () => CacheUtils.hrServices.getPublic(),
+    setPublicServices: (data) => CacheUtils.hrServices.setPublic(data),
+
+    // Admin services for admin panel
+    getAdminServices: () => CacheUtils.hrServices.getAdmin(),
+    setAdminServices: (data) => CacheUtils.hrServices.setAdmin(data),
+
+    // Service configuration
+    getServiceConfig: () => CacheUtils.hrServices.getConfig(),
+    setServiceConfig: (data) => CacheUtils.hrServices.setConfig(data),
+
+    // Invalidate caches after updates
+    invalidateServices: () => CacheUtils.hrServices.invalidateOnUpdate(),
+
+    // Clear all service caches
+    clearAllServices: () => CacheUtils.hrServices.clearAll(),
   };
 };
 

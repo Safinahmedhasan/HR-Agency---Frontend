@@ -16,6 +16,7 @@ import PendingUser from "../Pages/Admin/PendingUser/PendingUser";
 import ApproveUser from "../Pages/Admin/ApproveUser/ApproveUser";
 import AdminProfile from "../Pages/Admin/Profile/AdminProfile";
 import SiteSetting from "../Pages/Admin/SiteSetting/SiteSetting";
+import ServiceManagement from "../Pages/Admin/ServiceManagement/ServiceManagement";
 
 export const router = createBrowserRouter([
   // User Routes with Main Layout
@@ -82,6 +83,10 @@ export const router = createBrowserRouter([
       {
         path: "SiteSetting",
         element: <SiteSetting />,
+      },
+      {
+        path: "services",
+        element: <ServiceManagement />,
       },
     ],
   },
