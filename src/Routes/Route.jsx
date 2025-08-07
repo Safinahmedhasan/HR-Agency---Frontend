@@ -17,6 +17,7 @@ import ApproveUser from "../Pages/Admin/ApproveUser/ApproveUser";
 import AdminProfile from "../Pages/Admin/Profile/AdminProfile";
 import SiteSetting from "../Pages/Admin/SiteSetting/SiteSetting";
 import ServiceManagement from "../Pages/Admin/ServiceManagement/ServiceManagement";
+import WhyChooseUsManagement from "../Pages/Admin/WhyChooseUsManagement/WhyChooseUsManagement";
 
 export const router = createBrowserRouter([
   // User Routes with Main Layout
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
       {
         path: "services",
         element: <ServiceManagement />,
+      },
+       {
+        path: "why-choose-us", 
+        element: <WhyChooseUsManagement />,
       },
     ],
   },

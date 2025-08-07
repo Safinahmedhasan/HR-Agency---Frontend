@@ -14,6 +14,7 @@ import {
   UserCheck,
   Clock,
   Crown,
+  Lightbulb,
   RefreshCw,
 } from "lucide-react";
 
@@ -303,11 +304,17 @@ const AdminSidebar = ({ isSidebarOpen, isMobileMenuOpen, closeMobileMenu }) => {
         },
       ],
     },
-     {
+    {
       path: "/admin/services",
       name: "HR Services",
       icon: Database,
       description: "Manage HR Services",
+    },
+    {
+      path: "/admin/why-choose-us",
+      name: "Why Choose Us",
+      icon: Lightbulb,
+      description: "Manage Why Choose Us",
     },
     {
       path: "/admin/reports",
