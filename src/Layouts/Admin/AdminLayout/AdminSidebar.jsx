@@ -16,6 +16,7 @@ import {
   Crown,
   Lightbulb,
   RefreshCw,
+  MessageSquare,
 } from "lucide-react";
 
 const SIDEBAR_ADMIN_CACHE_KEY = "sidebar_admin_profile_cache";
@@ -315,6 +316,12 @@ const AdminSidebar = ({ isSidebarOpen, isMobileMenuOpen, closeMobileMenu }) => {
       name: "Why Choose Us",
       icon: Lightbulb,
       description: "Manage Why Choose Us",
+    },
+    {
+      path: "/admin/testimonials", 
+      name: "Testimonials",
+      icon: MessageSquare,
+      description: "Manage Client Testimonials",
     },
     {
       path: "/admin/reports",

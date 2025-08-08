@@ -18,6 +18,8 @@ import AdminProfile from "../Pages/Admin/Profile/AdminProfile";
 import SiteSetting from "../Pages/Admin/SiteSetting/SiteSetting";
 import ServiceManagement from "../Pages/Admin/ServiceManagement/ServiceManagement";
 import WhyChooseUsManagement from "../Pages/Admin/WhyChooseUsManagement/WhyChooseUsManagement";
+import NotFound from "../Pages/ErrorPages/NotFound/NotFound";
+import TestimonialsManagement from "../Pages/Admin/TestimonialsManagement/TestimonialsManagement";
 
 export const router = createBrowserRouter([
   // User Routes with Main Layout
@@ -89,10 +91,18 @@ export const router = createBrowserRouter([
         path: "services",
         element: <ServiceManagement />,
       },
-       {
-        path: "why-choose-us", 
+      {
+        path: "why-choose-us",
         element: <WhyChooseUsManagement />,
       },
+       {
+        path: "testimonials", 
+        element: <TestimonialsManagement />,
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);

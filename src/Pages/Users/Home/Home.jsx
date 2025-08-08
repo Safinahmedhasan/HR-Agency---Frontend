@@ -6,6 +6,7 @@ import TestimonialsSection from "../../../components/Users/Home/TestimonialsSect
 import CTASection from "../../../components/Users/Home/CTASection";
 import DynamicServicesSection from "../../../components/Users/Home/DynamicServicesSection/DynamicServicesSection";
 import DynamicWhyChooseUs from "../../../components/Users/Home/DynamicWhyChooseUs/DynamicWhyChooseUs";
+import DynamicTestimonialsSection from "../../../components/Users/Home/DynamicTestimonialsSection/DynamicTestimonialsSection";
 
 const Home = () => {
   return (
@@ -14,7 +15,8 @@ const Home = () => {
       <DynamicServicesSection />
       <DynamicWhyChooseUs />
       <StatsSection />
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
+      <DynamicTestimonialsSection/>
       <CTASection />
     </div>
   );
